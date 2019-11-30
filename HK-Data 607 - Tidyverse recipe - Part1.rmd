@@ -1,0 +1,64 @@
+---
+title: "Data 607 - Tidyverse Recipe - Part1"
+author: "Habib Khan"
+date: "November 30, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+The aim for this assignment is to create an example of tidyverse library and it is splitted into two parts: <br>
+
+Create an Example.  Using one or more TidyVerse packages, and any dataset from fivethirtyeight.com or Kaggle, create a programming sample “vignette” that demonstrates how to use one or more of the capabilities of the selected TidyVerse package with your selected dataset. (25 points) <br>
+
+
+Extend an Existing Example.  Using one of your classmate’s examples (as created above), extend his or her example with additional annotated code.
+
+# Loading the required libraries
+
+```{r message=FALSE}
+library(tidyverse)
+library(knitr)
+```
+
+
+
+
+tidyverse package is one of the efficient and effective libraries that is used for data manipulation. tidyverse has bunch of other libraries which are mostly used for data cleaning and visualization. According to Gabernet and Limburn (2017), employees use 80 percent of their times cleaning their data to make it ready for analysis. It shows the importance of data cleaning in the data science world.
+
+# tidyverse examples
+
+## Data cleaning
+
+For this example, I am reading the data from fivethirtyeight.com with reference to their polls on impeachment. 
+
+```{r}
+imp_data <- read.csv("impeachment_polls.csv", header=TRUE, na.strings = c("", "NA"))
+view(imp_data)
+```
+
+
+Here, I will be using pipe and some tidyverse functions to group the data and select the required columns and show them using kable function. 
+
+```{r}
+
+# Creating another dataset after filtering the required columns
+grouped_data <- imp_data %>% 
+  select(Pollster, Text, Category, Yes, No, Unsure)
+
+# Grouping the new dataset by Pollster
+grouped_data %>% 
+  group_by(Pollster) %>% 
+  kable()
+```
+
+
+
+
+# References
+
+https://www.ibm.com/cloud/blog/ibm-data-catalog-data-scientists-productivity
